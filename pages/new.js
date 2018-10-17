@@ -17,21 +17,18 @@ class New extends Component {
     constructor (props) {
         super(props);
         this.state = {
-            allocations: {
-                id:this.props.testString.uId,
-                catId:this.props.testString..map((cat) => cat.catId),
-                amount: this.props.testString.map((cat) => ""),
-                headings: this.props.testString.map((cat) => cat.Name),
-                month: this.props.firstDay}
+            allocations : this.props.testString
             }
 
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleChange(i, event) {
-        let values = [...this.state.values];
-        values[i] = event.target.value;
-        this.setState({ values });
+        
+        let allocations = this.state.allocations;
+        allocations[i].amount = event.target.value;
+        console.log(allocations[i].amount);
+        this.setState({ allocations });
     }
 
 
@@ -51,6 +48,7 @@ class New extends Component {
 
 
     render() {
+        console.log(this.state.allocations);
         return(
             <div>
                 <Head>
@@ -59,10 +57,10 @@ class New extends Component {
                 </Head>
                 <Container>
                     <Form onSubmit={this.handleSubmit}>
-                    {this.state.values.map((el, i) => (   
+                    {this.state.allocations.map((el, i) => (   
                         <Form.Field key={i} style={{marginTop:"10px"}}>
-                            <label>{this.state.headings[i]}</label>
-                            <input type="number" value={el||''} onChange={this.handleChange.bind(this,i)}/>
+                            <label>{this.state.allocations[i].Name}</label>
+                            <input type="number" value={el.value} onChange={this.handleChange.bind(this,i)}/>
                         </Form.Field>
                     ))}
 
